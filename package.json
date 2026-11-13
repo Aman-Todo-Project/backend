@@ -1,0 +1,26 @@
+{
+  "name": "taskflow-backend",
+  "version": "1.0.0",
+  "description": "TaskFlow REST API (Express + MongoDB)",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --env-file-if-exists=.env.test --test --test-concurrency=1 \"tests/**/*.test.js\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "helmet": "^8.3.0",
+    "mongoose": "^9.12.1"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^11.3.0",
+    "supertest": "^7.3.2"
+  }
+}

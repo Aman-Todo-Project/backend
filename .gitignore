@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment (keep .env.example and .env.test committed)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
