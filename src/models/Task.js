@@ -21,6 +21,11 @@ const taskSchema = new mongoose.Schema(
       type: Date,
       required: [true, 'Date & time is required'],
     },
+    // Optional end time ("Ends" in the Add Task sheet). Null when the task has no end.
+    endAt: {
+      type: Date,
+      default: null,
+    },
     priority: {
       type: String,
       enum: { values: PRIORITIES, message: 'Priority must be Low, Medium or High' },

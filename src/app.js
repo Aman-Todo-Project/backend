@@ -18,9 +18,16 @@ const allowedOrigins = [...DEFAULT_ORIGINS, ...CLIENT_URL.split(',')]
 // vite falls back to 5174, 5175 etc. when 5173 is taken, so allow any localhost port in dev
 const localhostRegex = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
 
+// Every Vercel deployment of the frontend gets its own URL, e.g.
+// https://front-l267g68j3-aman241192s-projects.vercel.app (per deploy) or
+// https://front-git-main-aman241192s-projects.vercel.app (per branch). Allow them all,
+// but only for this Vercel team, not every *.vercel.app site.
+const vercelDeploymentRegex = /^https:\/\/front-[a-z0-9-]+-aman241192s-projects\.vercel\.app$/;
+
 function isAllowedOrigin(origin) {
   if (!origin) return true;
   if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) return true;
+  if (vercelDeploymentRegex.test(origin)) return true;
   if (origin === 'http://localhost:5173') return true;
   return NODE_ENV !== 'production' && localhostRegex.test(origin);
 }

@@ -32,6 +32,17 @@ function buildTaskValidator({ partial }) {
       else data.scheduledAt = date;
     }
 
+    // Optional; null or '' clears it.
+    if (body.endAt === null || body.endAt === '') {
+      data.endAt = null;
+    } else if (body.endAt !== undefined) {
+      const valid = isString(body.endAt) || typeof body.endAt === 'number';
+      const date = valid ? new Date(body.endAt) : null;
+      if (!date || Number.isNaN(date.getTime())) errors.endAt = 'End time must be a valid date & time';
+      else if (data.scheduledAt && date <= data.scheduledAt) errors.endAt = 'End time must be after the start time';
+      else data.endAt = date;
+    }
+
     if (body.priority !== undefined && body.priority !== null && body.priority !== '') {
       if (!PRIORITIES.includes(body.priority)) errors.priority = 'Priority must be Low, Medium or High';
       else data.priority = body.priority;
